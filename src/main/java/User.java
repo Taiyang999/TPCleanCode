@@ -9,6 +9,7 @@ public class User {
     public User(String login) {
         for(User user : MyLibrary.users){
             if(user.login.equals(login)){
+                System.out.println("login invalid");
                 return;
             }
         }

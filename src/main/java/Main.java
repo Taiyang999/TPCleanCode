@@ -32,7 +32,5 @@ public class Main {
 
         System.out.println("Step 4: same user");
         User u3 = new User("mars");
-        MyLibrary.showBookList();
-        System.out.println(u3);
     }
 }
