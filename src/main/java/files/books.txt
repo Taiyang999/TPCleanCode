@@ -1,0 +1,4 @@
+name;author;borrowed
+Un livre;Son auteur
+2e livre;Son auteur
+livre beta;alpha test
