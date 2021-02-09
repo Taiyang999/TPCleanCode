@@ -12,6 +12,7 @@ public class Main {
 
         System.out.println("Step 1: borrow");
         assert u1 != null;
+        assert u2 != null;
         u1.borrow(book2);
         MyLibrary.showBookList();
         System.out.println(u1);
@@ -32,5 +33,10 @@ public class Main {
 
         System.out.println("Step 4: same user");
         User u3 = new User("mars");
+
+        System.out.println("Step 4: addbook");
+        u1.addBook(new Book("booook","author same",false));
+        u2.addBook(new Book("not","author same",false));
+        MyLibrary.showBookList();
     }
 }
