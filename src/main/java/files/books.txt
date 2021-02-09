@@ -1,6 +1,6 @@
 name;author;borrowed
 Un livre;Son auteur;true
-2e livre;Son auteur;true
+2e livre;Son auteur;false
 livre test1;alpha test;false
 livre test2;alpha test;false
 livre beta3;alpha test;false
