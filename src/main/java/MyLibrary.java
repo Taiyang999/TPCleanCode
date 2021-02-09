@@ -49,8 +49,6 @@ public class MyLibrary {
                 string_book = sc1.nextLine();
                 String[] user_params = string_book.split(";");
                 String login = user_params[0];
-                System.out.println(login);
-                System.out.println(user_params.length);
                 boolean librarian = Boolean.parseBoolean(user_params[1]);
                 ArrayList<Book> borrowed_books = new ArrayList<>();
                 for (int i = 2; i < user_params.length; i+=2) {

@@ -10,25 +10,26 @@ public class Main {
         System.out.println();
         User u1 = User.connect("mars");
         User u2 = User.connect("jupiter");
+        assert u1 != null;
+        assert u2 != null;
         //User u3 = new User("mercury");
         System.out.println(u1);
         System.out.println(u2);
         //System.out.println();
 
         System.out.println("Step 1: borrow");
-        assert u1 != null;
-        assert u2 != null;
+
         u1.borrow(book2);
         MyLibrary.showBookList();
         System.out.println(u1);
         System.out.println();
 
-        /*System.out.println("Step 2: return");
+        System.out.println("Step 2: return");
         u1.return_book(book2);
         MyLibrary.showBookList();
         System.out.println(u1);
         System.out.println();
-
+/*
         System.out.println("Step 3: can't get more");
         u1.borrow(book2);
         u1.borrow(MyLibrary.books.get(2));

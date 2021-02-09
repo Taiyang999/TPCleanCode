@@ -58,7 +58,8 @@ public class User {
         MyLibrary.booksContent.set(bookIndice,replaceInBookstxt);
         MyLibrary.updateBooks();
         int userIndice = MyLibrary.findLineByLogin(this.login);
-        MyLibrary.booksContent.set(userIndice,MyLibrary.booksContent.get(userIndice).replace(String.valueOf(bookIndice)+";date",""));
+        MyLibrary.usersContent.set(userIndice,MyLibrary.usersContent.get(userIndice).replace(String.valueOf(bookIndice)+";date",""));
+        MyLibrary.updateUsers();
     }
 
     public void addBook(Book book) throws IOException {
