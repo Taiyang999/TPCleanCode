@@ -1,4 +1,10 @@
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class User {
     String login;
@@ -6,7 +12,7 @@ public class User {
     boolean librarian;
 
 
-    public User(String login) {
+    public User(String login) throws IOException {
         for(User user : MyLibrary.users){
             if(user.login.equals(login)){
                 System.out.println("login invalid");
@@ -16,7 +22,8 @@ public class User {
         this.login = login;
         this.borrowed_book = new ArrayList<>();
         this.librarian=false;
-        //Todo user books file
+        MyLibrary.usersContent.add(login+";false;");
+        MyLibrary.updateUsers();
     }
 
     public User(String login,ArrayList<Book> borrowed_books) {
@@ -29,28 +36,41 @@ public class User {
         this.librarian = librarian;
     }
 
-    public void borrow(Book book){
+    public void borrow(Book book) throws IOException {
         if(!book.borrowed && borrowed_book.size()<4 && MyLibrary.books.contains(book)){
             this.borrowed_book.add(book);
             MyLibrary.books.get(MyLibrary.books.indexOf(book)).borrowed=true;
-            //Todo modify books file && users file
+            String replaceInBookstxt = book.title+";"+book.author_name+";"+true;
+            int bookIndice = MyLibrary.findLineByBook(book);
+            MyLibrary.booksContent.set(bookIndice,replaceInBookstxt);
+            MyLibrary.updateBooks();
+            int userIndice = MyLibrary.findLineByLogin(this.login);
+            MyLibrary.usersContent.set(userIndice,MyLibrary.usersContent.get(userIndice)+bookIndice+";date");
+            MyLibrary.updateUsers();
         }
     }
 
-    public void return_book(Book book){
+    public void return_book(Book book) throws IOException {
         this.borrowed_book.remove(book);
         MyLibrary.books.get(MyLibrary.books.indexOf(book)).borrowed=false;
-        //Todo modify books file && users file
+        String replaceInBookstxt = book.title+";"+book.author_name+";"+false;
+        int bookIndice = MyLibrary.findLineByBook(book);
+        MyLibrary.booksContent.set(bookIndice,replaceInBookstxt);
+        MyLibrary.updateBooks();
+        int userIndice = MyLibrary.findLineByLogin(this.login);
+        MyLibrary.booksContent.set(userIndice,MyLibrary.booksContent.get(userIndice).replace(String.valueOf(bookIndice)+";date",""));
     }
 
-    public void addBook(Book book){
+    public void addBook(Book book) throws IOException {
         if(this.librarian){
             MyLibrary.books.add(book);
+
             System.out.println("Success");
+            MyLibrary.booksContent.add(book.title+";"+book.author_name+";false");
+            MyLibrary.updateBooks();
         }else{
             System.out.println("acces denied");
         }
-        //Todo modify books file
     }
 
     public String toString(){
